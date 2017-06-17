@@ -2,12 +2,35 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+function Button(prop){
+
+}
+
+class Board extends Component{
+  render(){
+    return (
+      <div className="buttons">
+        <button> Red</button>
+        <button> Blue</button>
+        <button> Green</button>
+        <button> Yellow</button>
+      </div>
+    );
+  }
+}
+
+class Game extends Component{
+  render(){
+    <Board
+    />
+  }
+}
+
 class App extends Component {
   render() {
     return (
       <div className="App">
         <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
           <h2>Welcome to React</h2>
         </div>
         <p className="App-intro">
@@ -18,4 +41,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Game;
