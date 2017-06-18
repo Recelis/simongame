@@ -11,7 +11,11 @@ function Button(props){
 }
 
 class Board extends Component{
-  buttonHandler(color){
+  constructor(){
+    super();
+
+  }
+  createButton(color){
     return <Button
       value = {color}
       onClick={()=>this.props.onClick(color)}
@@ -21,19 +25,19 @@ class Board extends Component{
     return (
       <div>
         <div className="colors">
-          {this.buttonHandler('red')}
-          {this.buttonHandler('green')}
-          {this.buttonHandler('yellow')}
-          {this.buttonHandler('blue')}
+          {this.createButton('red')}
+          {this.createButton('green')}
+          {this.createButton('yellow')}
+          {this.createButton('blue')}
         </div>
         <div className="turnOn">
-          {this.buttonHandler('OnOff')}
+          {this.createButton('OnOff')}
         </div>
         <div className="Start">
-          {this.buttonHandler('start')}
+          {this.createButton('start')}
         </div>
         <div className="Score">
-          {this.buttonHandler('score')}
+          {this.createButton('score')}
         </div>
       </div>
     );
@@ -47,11 +51,17 @@ class Game extends Component {
   sounds(){
     
   }
+  handleClick(){
+    alert("okay!");
+  }
+
   render() {
     return (
       <div className="App">
         <h1>Simon Game</h1>
-        <Board />
+        <Board 
+          onClick={()=>this.handleClick()}
+        />
       </div>
     );
   }
