@@ -45,6 +45,12 @@ class Board extends Component{
 }
 
 class Game extends Component {
+  constructor(){
+    super();
+    this.state={
+      memory:[],
+    }
+  }
   randomGenerator(){
 
   }
