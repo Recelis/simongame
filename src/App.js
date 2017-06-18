@@ -2,32 +2,56 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-function Button(prop){
-
+function Button(props){
+  return(
+    <button className = "button" onClick={props.onClick}>
+      {props.value}
+    </button>
+  );
 }
 
 class Board extends Component{
+  buttonHandler(color){
+    return <Button
+      value = {color}
+      onClick={()=>this.props.onClick(color)}
+    />
+  }
   render(){
     return (
-      <div className="buttons">
-        <button> Red</button>
-        <button> Blue</button>
-        <button> Green</button>
-        <button> Yellow</button>
+      <div>
+        <div className="colors">
+          {this.buttonHandler('red')}
+          {this.buttonHandler('green')}
+          {this.buttonHandler('yellow')}
+          {this.buttonHandler('blue')}
+        </div>
+        <div className="turnOn">
+          {this.buttonHandler('OnOff')}
+        </div>
+        <div className="Start">
+          {this.buttonHandler('start')}
+        </div>
+        <div className="Score">
+          {this.buttonHandler('score')}
+        </div>
       </div>
     );
   }
 }
 
 class Game extends Component {
+  randomGenerator(){
 
+  }
+  sounds(){
+    
+  }
   render() {
     return (
       <div className="App">
-        <div className="App-header">
-          <h2>Simon Game</h2>
-        </div>
-        <button></button>
+        <h1>Simon Game</h1>
+        <Board />
       </div>
     );
   }
