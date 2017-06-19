@@ -2,18 +2,33 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-function Button(props){
+function Button(color){
   return(
-    <button className = "button" onClick={props.onClick}>
-      {props.value}
+    <button className = "button" onClick={color.onClick}>
+      {color.value}
     </button>
+  );
+}
+
+function Switch(state){
+
+return(
+  null
+);
+}
+
+function Score(){
+  return (
+    null
   );
 }
 
 class Board extends Component{
   constructor(){
     super();
-
+    this.state={
+      setOn: true
+    }
   }
   createButton(color){
     return <Button
@@ -21,6 +36,15 @@ class Board extends Component{
       onClick={()=>this.props.onClick(color)}
     />
   }
+  createToggle(state){
+  return <Switch
+      
+  />
+  }
+  createScore(){
+    return null;
+  }
+
   render(){
     return (
       <div>
@@ -31,13 +55,13 @@ class Board extends Component{
           {this.createButton('blue')}
         </div>
         <div className="turnOn">
-          {this.createButton('OnOff')}
+          {this.createToggle('state')}
         </div>
         <div className="Start">
           {this.createButton('start')}
         </div>
         <div className="Score">
-          {this.createButton('score')}
+          {this.createScore()}
         </div>
       </div>
     );
