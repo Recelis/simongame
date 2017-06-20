@@ -35,33 +35,20 @@ class Board extends Component{
   constructor(){
     super();
     this.state={
-      setOn: 'off',
-      isOn: true,
-      isStarted: false.toString(),
+       
     }
   }
-  toggleClick(){ // change to feature fully functional slide
-    this.setState({
-      setOn: this.state.isOn ? 'off':'on',
-      isOn: !this.state.isOn,
-      isStarted: false.toString(),
-    })
-  }
-  setStartState(){
-    if (this.state.isOn == false) this.setState({isStarted: false.toString()});
-    else this.setState({isStarted: true.toString()});
-    alert(this.state.isStarted.toString());
-  }
-  createToggle(){
+  
+  renderToggle(){
     return <Switch
-      setOn = {this.state.setOn}
-      onClick={()=>this.toggleClick()}
+      setOn = {this.props.setOn}
+      onClick={()=>this.props.toggleClick()}
     />
   }
-  createStart(){
+  renderStart(){
     return <StartButton
       isStarted = {this.state.isStarted}
-      onClick = {()=>this.setStartState()}
+      onClick = {()=>this.props.setStartState()}
     />
   }
   // createButton(color){
@@ -79,10 +66,10 @@ class Board extends Component{
     return (
       <div>
         <div className="turnOn">
-          {this.createToggle()}
+          {this.renderToggle()}
         </div>
         <div className = "start">
-          {this.createStart(0)}
+          {this.renderStart(0)}
         </div>
       </div>
     );
@@ -104,7 +91,9 @@ class Game extends Component {
   constructor(){
     super();
     this.state={
-      
+      setOn: 'off',
+      isOn: true,
+      isStarted: false.toString(),
     }
   }
   // onState(){
@@ -118,17 +107,30 @@ class Game extends Component {
   // sounds(){
     
   // }
-  handleClick(){
-    
-    alert(this.randomGenerator());
+  toggleClick(){ // change to feature fully functional slide
+    this.setState({
+      setOn: this.state.isOn ? 'off':'on',
+      isOn: !this.state.isOn,
+      isStarted: false.toString(),
+    })
   }
+
+  setStartState(){
+    if (this.state.isOn == false) this.setState({isStarted: false.toString()});
+    else this.setState({isStarted: true.toString()});
+    alert(this.state.isStarted.toString());
+  }
+
 
   render() {
     return (
       <div className="App">
         <h1>Simon Game</h1>
         <Board 
-
+          setOn = {this.state.setOn}
+          isOn = {this.state.isOn}
+          setStartState = {()=>this.setStartState()}
+          toggleClick = {()=>this.toggleClick()}
         />
       </div>
     );
