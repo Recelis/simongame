@@ -11,8 +11,16 @@ import './App.css';
 
 function Switch(props){
   return(
-    <button className="button" onClick={()=>props.onClick()}>
+    <button className="switch" onClick={()=>props.onClick()}>
       {props.setOn}
+    </button>
+  )
+}
+
+function StartButton(props){
+  return (
+    <button className="start" onClick={()=>props.onClick()}>
+      {<p>start</p>} 
     </button>
   )
 }
@@ -27,21 +35,33 @@ class Board extends Component{
   constructor(){
     super();
     this.state={
-      setOn: 'on',
+      setOn: 'off',
       isOn: true,
+      isStarted: false.toString(),
     }
   }
-  toggleClick(){
+  toggleClick(){ // change to feature fully functional slide
     this.setState({
       setOn: this.state.isOn ? 'off':'on',
-      isOn: !this.state.isOn
+      isOn: !this.state.isOn,
+      isStarted: false.toString(),
     })
   }
-
-  createToggle(toggleState){
+  setStartState(){
+    if (this.state.isOn == false) this.setState({isStarted: false.toString()});
+    else this.setState({isStarted: true.toString()});
+    alert(this.state.isStarted.toString());
+  }
+  createToggle(){
     return <Switch
       setOn = {this.state.setOn}
       onClick={()=>this.toggleClick()}
+    />
+  }
+  createStart(){
+    return <StartButton
+      isStarted = {this.state.isStarted}
+      onClick = {()=>this.setStartState()}
     />
   }
   // createButton(color){
@@ -58,11 +78,12 @@ class Board extends Component{
   render(){
     return (
       <div>
-        
         <div className="turnOn">
-          {this.createToggle('toggleState')}
+          {this.createToggle()}
         </div>
-        
+        <div className = "start">
+          {this.createStart(0)}
+        </div>
       </div>
     );
   }
@@ -86,17 +107,17 @@ class Game extends Component {
       
     }
   }
-  onState(){
+  // onState(){
 
-  }
-  randomGenerator(){
-    var min = 0
-    var max = 4;
-    return Math.floor(Math.random() * (max - min)) + min;
-  }
-  sounds(){
+  // }
+  // randomGenerator(){
+  //   var min = 0
+  //   var max = 4;
+  //   return Math.floor(Math.random() * (max - min)) + min;
+  // }
+  // sounds(){
     
-  }
+  // }
   handleClick(){
     
     alert(this.randomGenerator());
@@ -107,7 +128,7 @@ class Game extends Component {
       <div className="App">
         <h1>Simon Game</h1>
         <Board 
-          
+
         />
       </div>
     );
