@@ -32,26 +32,29 @@ import MyGame from './components/myGame'
           {this.createScore()}
         </div>*/
 
-  // onState(){
+// onState(){
 
-  // }
-  // randomGenerator(){
-  //   var min = 0
-  //   var max = 4;
-  //   return Math.floor(Math.random() * (max - min)) + min;
-  // }
-  // sounds(){
-    
-  // }
+// }
+// randomGenerator(){
+//   var min = 0
+//   var max = 4;
+//   return Math.floor(Math.random() * (max - min)) + min;
+// }
+// sounds(){
+
+// }
 
 
 
-class App extends Component{
-  render(){
-    return(
-      <MyGame
+class App extends Component {
+  render() {
+    return (
+      <div>
+        <MyGame
 
-      />
+        />
+        <div><p className = "copyright">created By Jacky Lui using ReactJS &#169; 2017</p></div>
+      </div>
     )
   }
 }

@@ -6,7 +6,7 @@ class MyGame extends Component {
     super();
     this.state={
       setOn: 'off',
-      isOn: true,
+      isOn: false,
       isStarted: false.toString(),
     }
   }
