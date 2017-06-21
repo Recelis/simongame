@@ -1,9 +1,12 @@
-import React from "react"
+import React, { Component } from 'react'
 
-const MyButton = (props)=>{
-    return(
-        <button>{props.text}</button>
-    )
-} 
+class MyButton extends Component {
+    render() {
+        return (
+            <button>{this.props.color}</button>
+        )
+    }
+}
+
 
 export default MyButton;
