@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
+import MyButton from './components/myButton'
+import MyBoard from './components/myBoard'
 
 // function Button(color){
 //   return(
@@ -126,15 +128,13 @@ class Game extends Component {
     return (
       <div className="App">
         <h1>Simon Game</h1>
-        <Board 
-          setOn = {this.state.setOn}
-          isOn = {this.state.isOn}
-          setStartState = {()=>this.setStartState()}
-          toggleClick = {()=>this.toggleClick()}
-        />
+        <MyBoard />
+        
       </div>
     );
   }
 }
+
+
 
 export default Game;
