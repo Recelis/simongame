@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import MyBoard from './myBoard'
 
+let isStarted = false;
+
 class MyGame extends Component {
   constructor(){
     super();
@@ -19,9 +21,9 @@ class MyGame extends Component {
   }
 
   setStartState(){
-    if (this.state.isOn === false) this.setState({isStarted: false.toString()});
-    else this.setState({isStarted: true.toString()});
-    alert(this.state.isStarted.toString());
+    if (this.state.isOn === false) isStarted = false;
+    else isStarted = true;
+    this.setState({isStarted: isStarted.toString});
   }
 
   render() {
