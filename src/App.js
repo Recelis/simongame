@@ -3,6 +3,8 @@ import './App.css';
 import MyButton from './components/myButton'
 import MyBoard from './components/myBoard'
 import MyGame from './components/myGame'
+
+"use strict";
 // function Button(color){
 //   return(
 //     <button className = "button" onClick={color.onClick}>

@@ -19,7 +19,7 @@ class MyGame extends Component {
   }
 
   setStartState(){
-    if (this.state.isOn == false) this.setState({isStarted: false.toString()});
+    if (this.state.isOn === false) this.setState({isStarted: false.toString()});
     else this.setState({isStarted: true.toString()});
     alert(this.state.isStarted.toString());
   }
