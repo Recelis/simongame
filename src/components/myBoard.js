@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import MyButton from './myButton'
 
+
 class MyBoard extends Component {
     constructor() {
         super();
         this.state = {
             setOn: "on",
-            text: "off"
+            text: "off",
         }
     }
     renderToggle() {
@@ -21,6 +22,12 @@ class MyBoard extends Component {
             onClick={() => this.props.setStartState()}
         />
     }
+    renderScreen(){
+        return <MyScreen
+            screen={this.props.screen}
+        />
+    }
+
     render() {
         // let Buttons = this.offToOn();
         return (
@@ -35,6 +42,9 @@ class MyBoard extends Component {
                 <MyButton color = 'blue'/>
                 <MyButton color = 'green'/>
                 <MyButton color = 'yellow'/>
+                <div className= "screen">
+                    {this.renderScreen()}
+                </div>
             </div>
         );
     }
@@ -55,6 +65,12 @@ function StartButton(props){
       {<p>start</p>} 
     </button>
   )
+}
+
+function MyScreen(props){
+    return (
+        <p>{props.screen}</p>
+    )
 }
 
 export default MyBoard

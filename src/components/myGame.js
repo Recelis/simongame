@@ -10,6 +10,7 @@ class MyGame extends Component {
       setOn: 'off',
       isOn: false,
       isStarted: false.toString(),
+      score:0,
     }
   }
     toggleClick(){ // change to feature fully functional slide
@@ -26,6 +27,8 @@ class MyGame extends Component {
     this.setState({isStarted: isStarted.toString});
   }
 
+
+
   render() {
     return (
       <div className="App">
@@ -35,6 +38,7 @@ class MyGame extends Component {
           isOn = {this.state.isOn}
           setStartState = {()=>this.setStartState()}
           toggleClick = {()=>this.toggleClick()}
+          screen={this.state.score}
         />
         
       </div>

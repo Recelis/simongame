@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-import MyButton from './components/myButton'
-import MyBoard from './components/myBoard'
 import MyGame from './components/myGame'
 
 "use strict";
