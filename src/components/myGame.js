@@ -5,6 +5,7 @@ let isStarted = false;
 let input = [];
 var sequence = [];
 var timerHandler;
+var  pressedButtonFlag = false;
 
 class MyGame extends Component {
   constructor() {
@@ -16,7 +17,7 @@ class MyGame extends Component {
       score: 0,
       mode: 'output',
       strictMode: false,
-      pressedButtonFlag: false,
+     
     }
   }
   toggleClick() { // change to feature fully functional slide
@@ -44,8 +45,8 @@ class MyGame extends Component {
 
   gameplay() {
     if (input.length !== sequence.length) {
-      if (this.state.pressedButtonFlag === false) return this.restart();
-      else this.setState({pressedButtonFlag:false});
+      if (pressedButtonFlag === false) return this.restart();
+      else pressedButtonFlag=false;
     } 
   }
 
@@ -59,7 +60,7 @@ class MyGame extends Component {
   }
 
   buttonClick(color) {
-    this.setState({pressedButtonFlag:true});
+    pressedButtonFlag=true;
     switch (this.state.mode) {
       case "input":
         input.push(color);
