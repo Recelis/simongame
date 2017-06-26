@@ -28,11 +28,11 @@ class MyGame extends Component {
 
   setStartState() {
     if (this.state.isOn === false) isStarted = false;
-    else isStarted = true;
-    this.setState({ isStarted: isStarted.toString });
-    var randomNum = this.generateRandomSequence();
-    sequence.push(this.convertToColor(randomNum));
-    console.log(sequence);
+    else {
+      isStarted = true;
+      this.setState({ isStarted: isStarted.toString });
+      this.setSequence();
+    }
   }
   buttonClick(color) {
     switch (this.state.mode) {
@@ -43,6 +43,14 @@ class MyGame extends Component {
         console.log(color);
         input = [];
         break;
+    }
+  }
+
+  setSequence() {
+    if (sequence < this.state.score + 1) {
+      var randomNum = this.generateRandomSequence();
+      sequence.push(this.convertToColor(randomNum));
+      console.log(sequence);
     }
   }
 
