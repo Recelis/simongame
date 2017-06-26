@@ -22,9 +22,15 @@ class MyBoard extends Component {
             onClick={() => this.props.setStartState()}
         />
     }
-    renderScreen(){
+    renderScreen() {
         return <MyScreen
             screen={this.props.screen}
+        />
+    }
+    renderButtons(color) {
+        return <MyButton
+            color = {color}
+            onClick={()=>this.props.onClick(color)}
         />
     }
 
@@ -38,11 +44,13 @@ class MyBoard extends Component {
                 <div className="start">
                     {this.renderStart(0)}
                 </div>
-                <MyButton color = 'red'/>
-                <MyButton color = 'blue'/>
-                <MyButton color = 'green'/>
-                <MyButton color = 'yellow'/>
-                <div className= "screen">
+                <div className="buttons">
+                    {this.renderButtons("red")}
+                    {this.renderButtons("blue")}
+                    {this.renderButtons("green")}
+                    {this.renderButtons("yellow")}
+                </div>
+                <div className="screen">
                     {this.renderScreen()}
                 </div>
             </div>
@@ -51,23 +59,23 @@ class MyBoard extends Component {
 }
 
 
-function Switch(props){
-  return(
-    <button className="switch" onClick={()=>props.onClick()}>
-      {props.setOn}
-    </button>
-  )
+function Switch(props) {
+    return (
+        <button className="switch" onClick={() => props.onClick()}>
+            {props.setOn}
+        </button>
+    )
 }
 
-function StartButton(props){
-  return (
-    <button className="start" onClick={()=>props.onClick()}>
-      {<p>start</p>} 
-    </button>
-  )
+function StartButton(props) {
+    return (
+        <button className="start" onClick={() => props.onClick()}>
+            {<p>start</p>}
+        </button>
+    )
 }
 
-function MyScreen(props){
+function MyScreen(props) {
     return (
         <p>{props.screen}</p>
     )
