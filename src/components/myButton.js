@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+"use strict";
 
 class MyButton extends Component {
     render() {

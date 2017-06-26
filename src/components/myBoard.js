@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import MyButton from './myButton'
 
+"use strict";
 
 class MyBoard extends Component {
     constructor() {
