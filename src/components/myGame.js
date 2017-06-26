@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 import MyBoard from './myBoard'
 
-"use strict";
-
 let isStarted = false;
 let input = [];
 var sequence = [];
+var timerHandler;
 
 class MyGame extends Component {
   constructor() {
@@ -16,6 +15,8 @@ class MyGame extends Component {
       isStarted: false.toString(),
       score: 0,
       mode: 'output',
+      strictMode: false,
+      pressedButtonFlag: false,
     }
   }
   toggleClick() { // change to feature fully functional slide
@@ -24,17 +25,41 @@ class MyGame extends Component {
       isOn: !this.state.isOn,
       isStarted: false.toString(),
     })
+    if (timerHandler !== undefined) clearInterval(timerHandler);
   }
 
   setStartState() {
     if (this.state.isOn === false) isStarted = false;
     else {
       isStarted = true;
-      this.setState({ isStarted: isStarted.toString });
+      this.setState({
+        isStarted: isStarted.toString,
+        mode: 'output'
+      });
+      this.overRideRestart();
       this.setSequence();
+      timerHandler = setInterval(() => this.gameplay(), 5000);
     }
   }
+
+  gameplay() {
+    if (input.length !== sequence.length) {
+      if (this.state.pressedButtonFlag === false) return this.restart();
+      else this.setState({pressedButtonFlag:false});
+    } 
+  }
+
+  restart() {
+    if (this.state.strictMode === false) alert("restart level!");
+    else alert("restart game!");
+  }
+
+  overRideRestart(){
+    alert("restart game!");
+  }
+
   buttonClick(color) {
+    this.setState({pressedButtonFlag:true});
     switch (this.state.mode) {
       case "input":
         input.push(color);
@@ -42,6 +67,8 @@ class MyGame extends Component {
       case "output":
         console.log(color);
         input = [];
+        break;
+      default:
         break;
     }
   }
@@ -68,6 +95,8 @@ class MyGame extends Component {
         break;
       case 3:
         output = "yellow";
+        break;
+      default:
         break;
     }
     return output;
