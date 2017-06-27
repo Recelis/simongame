@@ -5,7 +5,8 @@ let isStarted = false;
 let input = [];
 var sequence = [];
 var timerHandler;
-var  pressedButtonFlag = false;
+var pressedButtonFlag = false;
+var counting = 0;
 
 class MyGame extends Component {
   constructor() {
@@ -17,7 +18,7 @@ class MyGame extends Component {
       score: 0,
       mode: 'output',
       strictMode: false,
-     
+
     }
   }
   toggleClick() { // change to feature fully functional slide
@@ -39,15 +40,29 @@ class MyGame extends Component {
       });
       this.overRideRestart();
       this.setSequence();
-      timerHandler = setInterval(() => this.gameplay(), 5000);
+      timerHandler = setInterval(() => this.gameplay(), 2000);
     }
   }
 
   gameplay() {
-    if (input.length !== sequence.length) {
-      if (pressedButtonFlag === false) return this.restart();
-      else pressedButtonFlag=false;
-    } 
+    if (this.state.mode === 'output') {
+      // count up to sequence all played
+      if (counting < sequence.length) counting++;
+      else {
+        counting = 0;
+        console.log(counting);
+        return this.setState({mode:'input'});
+      }
+    } else if (this.state.mode === 'input') {
+      if (input.length !== sequence.length) {
+        if (pressedButtonFlag === false) return this.restart(); // didn't press button in time
+        else {
+          pressedButtonFlag = false;
+        }
+      }
+    } else {
+      // do nothing
+    }
   }
 
   restart() {
@@ -55,22 +70,37 @@ class MyGame extends Component {
     else alert("restart game!");
   }
 
-  overRideRestart(){
+  overRideRestart() {
     alert("restart game!");
   }
 
   buttonClick(color) {
-    pressedButtonFlag=true;
+    console.log(input); // do nothing
+    pressedButtonFlag = true;
     switch (this.state.mode) {
       case "input":
         input.push(color);
+        this.checkInputAgainstOutput();
         break;
       case "output":
-        console.log(color);
         input = [];
         break;
       default:
         break;
+    }
+  }
+
+  checkInputAgainstOutput() {
+    for (var ii = 0; ii < input.length; ii++) {
+      if (input[ii] !== sequence[ii]) {
+        this.restart();
+        break;
+      }
+    }
+    if (input.length === sequence.length) {
+      console.log("next level!");
+      this.setState({mode:'output',score:this.state.score++});
+      this.setSequence();
     }
   }
 
