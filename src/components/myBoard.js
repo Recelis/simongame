@@ -50,7 +50,7 @@ class MyBoard extends Component {
                     {this.renderButtons("blue")}
                 </div>
                 <div className="control">
-                    <div className = "title"><h1>Simon Game</h1></div>
+                    <div className = "title"><h1>Simon <sup>&reg;</sup></h1></div>
                     <div className="turnOn">
                         {this.renderToggle()}
                     </div>
