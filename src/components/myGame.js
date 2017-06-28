@@ -7,7 +7,7 @@ var sequence = [];
 var timerHandler;
 var pressedButtonFlag = false;
 var counting = 0;
-
+var score = 0;
 class MyGame extends Component {
   constructor() {
     super();
@@ -15,10 +15,9 @@ class MyGame extends Component {
       setOn: 'off',
       isOn: false,
       isStarted: false.toString(),
-      score: 0,
+      scoreDisplay: '--',
       mode: 'output',
       strictMode: false,
-
     }
   }
   toggleClick() { // change to feature fully functional slide
@@ -36,7 +35,8 @@ class MyGame extends Component {
       isStarted = true;
       this.setState({
         isStarted: isStarted.toString,
-        mode: 'output'
+        mode: 'output',
+        scoreDisplay: 0
       });
       this.overRideRestart();
       this.setSequence();
@@ -75,7 +75,6 @@ class MyGame extends Component {
   }
 
   buttonClick(color) {
-    console.log(input); // do nothing
     pressedButtonFlag = true;
     switch (this.state.mode) {
       case "input":
@@ -88,6 +87,7 @@ class MyGame extends Component {
       default:
         break;
     }
+    console.log("input: "+input);
   }
 
   checkInputAgainstOutput() {
@@ -99,16 +99,20 @@ class MyGame extends Component {
     }
     if (input.length === sequence.length) {
       console.log("next level!");
-      this.setState({mode:'output',score:this.state.score++});
+      score++;
+      this.setState({
+        mode:'output',
+        scoreDisplay:score,
+      });
       this.setSequence();
     }
   }
 
   setSequence() {
-    if (sequence < this.state.score + 1) {
+    if (sequence.length < score + 1) {
       var randomNum = this.generateRandomSequence();
       sequence.push(this.convertToColor(randomNum));
-      console.log(sequence);
+      console.log("sequence: " + sequence);
     }
   }
 
@@ -149,7 +153,7 @@ class MyGame extends Component {
           isOn={this.state.isOn}
           setStartState={() => this.setStartState()}
           toggleClick={() => this.toggleClick()}
-          screen={this.state.score}
+          screen={this.state.scoreDisplay}
           onClick={(color) => this.buttonClick(color)}
         />
 
