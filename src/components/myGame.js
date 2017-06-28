@@ -8,79 +8,52 @@ var timerHandler;
 var pressedButtonFlag = false;
 var counting = 0;
 var score = 0;
-var strictMode= false;
+var strictMode = false;
+var mode = 'output';
+var isOn = false;
+
 
 class MyGame extends Component {
   constructor() {
     super();
     this.state = {
       setOn: 'off',
-      isOn: false,
-      isStarted: false.toString(),
       scoreDisplay: '--',
-      mode: 'output',
     }
   }
-  toggleClick() { // change to feature fully functional slide
-    this.setState({
-      setOn: this.state.isOn ? 'off' : 'on',
-      isOn: !this.state.isOn,
-      isStarted: false.toString(),
-    })
-    if (timerHandler !== undefined) clearInterval(timerHandler);
-  }
+
 
   setStartState() {
-    if (this.state.isOn === false) isStarted = false;
+    gameRestart();
+    if (isOn === false) isStarted = false;
     else {
       isStarted = true;
       this.setState({
         isStarted: isStarted.toString,
-        mode: 'output',
         scoreDisplay: 0
       });
-      this.overRideRestart();
-      this.setSequence();
-      timerHandler = setInterval(() => this.gameplay(), 2000);
+      setSequence();
+      timerHandler = setInterval(() => gameplay(), 2000);
     }
   }
 
-  gameplay() {
-    if (this.state.mode === 'output') {
-      // count up to sequence all played
-      if (counting < sequence.length) counting++;
-      else {
-        counting = 0;
-        console.log(counting);
-        return this.setState({mode:'input'});
-      }
-    } else if (this.state.mode === 'input') {
-      if (input.length !== sequence.length) {
-        if (pressedButtonFlag === false) return this.restart(); // didn't press button in time
-        else {
-          pressedButtonFlag = false;
-        }
-      }
-    } else {
-      // do nothing
-    }
-  }
 
-  restart() {
-    if (strictMode === false) alert("restart level!");
-    else alert("restart game!");
-  }
-
-  overRideRestart() {
-    alert("restart game!");
+  toggleClick() { // change to feature fully functional slide
+    this.setState({
+      setOn: isOn ? 'off' : 'on',
+      isStarted: false.toString(),
+    })
+    isOn = !isOn;
+    if (timerHandler !== undefined) clearInterval(timerHandler);
   }
 
   buttonClick(color) {
     pressedButtonFlag = true;
-    switch (this.state.mode) {
+    switch (mode) {
       case "input":
         input.push(color);
-        this.checkInputAgainstOutput();
+        checkInputAgainstOutput();
+        this.setState({scoreDisplay: score});
         break;
       case "output":
         input = [];
@@ -88,63 +61,11 @@ class MyGame extends Component {
       default:
         break;
     }
-    console.log("input: "+input);
+    console.log("input: " + input);
   }
 
-  checkInputAgainstOutput() {
-    for (var ii = 0; ii < input.length; ii++) {
-      if (input[ii] !== sequence[ii]) {
-        this.restart();
-        break;
-      }
-    }
-    if (input.length === sequence.length) {
-      console.log("next level!");
-      score++;
-      this.setState({
-        mode:'output',
-        scoreDisplay:score,
-      });
-      this.setSequence();
-    }
-  }
-
-  setSequence() {
-    if (sequence.length < score + 1) {
-      var randomNum = this.generateRandomSequence();
-      sequence.push(this.convertToColor(randomNum));
-      console.log("sequence: " + sequence);
-    }
-  }
-
-  convertToColor(num) {
-    var output;
-    switch (num) {
-      case 0:
-        output = "red";
-        break;
-      case 1:
-        output = "blue";
-        break;
-      case 2:
-        output = "green";
-        break;
-      case 3:
-        output = "yellow";
-        break;
-      default:
-        break;
-    }
-    return output;
-  }
-
-  generateRandomSequence() {
-    var min = 0
-    var max = 4;
-    return Math.floor(Math.random() * (max - min)) + min;
-  }
-  setStrict(){
-    strictMode = strictMode ? false:true;
+  setStrict() {
+    strictMode = strictMode ? false : true;
   }
 
   render() {
@@ -158,12 +79,106 @@ class MyGame extends Component {
           toggleClick={() => this.toggleClick()}
           screen={this.state.scoreDisplay}
           onClick={(color) => this.buttonClick(color)}
-          strictClick={()=>this.setStrict()}
+          strictClick={() => this.setStrict()}
         />
 
       </div>
     );
   }
 }
+
+function restart() {
+  if (strictMode === false) {
+    console.log("restart level");
+
+  }
+  else gameRestart();
+}
+
+function gameRestart() { // restarts game
+  console.log("restart game");
+  mode = 'output';
+  score = 0;
+  isStarted = false;
+  input = [];
+  sequence = [];
+  pressedButtonFlag = [];
+  counting = 0;
+  return 0;
+}
+
+function gameplay() {
+  if (mode === 'output') {
+    // count up to sequence all played
+    if (counting < sequence.length) console.log("beeps:" + counting++);
+    else {
+      counting = 0;
+      console.log(counting);
+      return mode = 'input';
+    }
+  } else if (mode === 'input') {
+    if (input.length !== sequence.length) {
+      if (pressedButtonFlag === false) return restart(); // didn't press button in time
+      else {
+        pressedButtonFlag = false;
+      }
+    }
+  } else {
+    // do nothing
+  }
+}
+
+function checkInputAgainstOutput() {
+  for (var ii = 0; ii < input.length; ii++) {
+    if (input[ii] !== sequence[ii]) {
+      restart();
+      break;
+    }
+  }
+  if (input.length === sequence.length) {
+    console.log("next level!");
+    score++;
+    mode = 'output';
+    setSequence();
+  }
+}
+
+function setSequence() {
+  console.log("setsequence");
+  if (sequence.length < score + 1) {
+    var randomNum = generateRandomSequence();
+    sequence.push(convertToColor(randomNum));
+    console.log("sequence: " + sequence);
+  }
+}
+
+
+function generateRandomSequence() {
+  var min = 0
+  var max = 4;
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+
+function convertToColor(num) {
+  var output;
+  switch (num) {
+    case 0:
+      output = "red";
+      break;
+    case 1:
+      output = "blue";
+      break;
+    case 2:
+      output = "green";
+      break;
+    case 3:
+      output = "yellow";
+      break;
+    default:
+      break;
+  }
+  return output;
+}
+
 
 export default MyGame;
