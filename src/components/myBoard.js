@@ -32,6 +32,11 @@ class MyBoard extends Component {
             onClick={()=>this.props.onClick(color)}
         />
     }
+    renderStrict(){
+        return <StrictButton
+            strictClick = {()=>this.props.strictClick()}
+        />
+    }
 
     render() {
         // let Buttons = this.offToOn();
@@ -51,6 +56,9 @@ class MyBoard extends Component {
                 </div>
                 <div className="screen">
                     {this.renderScreen()}
+                </div>
+                <div className="strict">
+                    {this.renderStrict()}
                 </div>
             </div>
         );
@@ -79,6 +87,15 @@ function MyScreen(props) {
         <p>{props.screen}</p>
     )
 }
+
+function StrictButton(props){
+    return (
+        <button className="strictButton" onClick={()=> props.strictClick()}>
+            {<p>strict mode</p>}
+        </button>
+    )
+}
+
 
 export default MyBoard
 

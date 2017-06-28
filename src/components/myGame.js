@@ -8,6 +8,8 @@ var timerHandler;
 var pressedButtonFlag = false;
 var counting = 0;
 var score = 0;
+var strictMode= false;
+
 class MyGame extends Component {
   constructor() {
     super();
@@ -17,7 +19,6 @@ class MyGame extends Component {
       isStarted: false.toString(),
       scoreDisplay: '--',
       mode: 'output',
-      strictMode: false,
     }
   }
   toggleClick() { // change to feature fully functional slide
@@ -66,7 +67,7 @@ class MyGame extends Component {
   }
 
   restart() {
-    if (this.state.strictMode === false) alert("restart level!");
+    if (strictMode === false) alert("restart level!");
     else alert("restart game!");
   }
 
@@ -142,7 +143,9 @@ class MyGame extends Component {
     var max = 4;
     return Math.floor(Math.random() * (max - min)) + min;
   }
-
+  setStrict(){
+    strictMode = strictMode ? false:true;
+  }
 
   render() {
     return (
@@ -155,6 +158,7 @@ class MyGame extends Component {
           toggleClick={() => this.toggleClick()}
           screen={this.state.scoreDisplay}
           onClick={(color) => this.buttonClick(color)}
+          strictClick={()=>this.setStrict()}
         />
 
       </div>
