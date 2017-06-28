@@ -7,8 +7,8 @@
   border-radius: 100% 0 0 0;
   min-width:30px;
   min-height:30px;
-  width:60px;
-  height:60px;
+  width:150px;
+  height:150px;
 }
 
 .red{
@@ -17,8 +17,8 @@
   border-radius: 0 100% 0 0;
   min-width:30px;
   min-height:30px;
-  width:60px;
-  height:60px;
+  width:150px;
+  height:150px;
 }
 
 .yellow{
@@ -27,8 +27,8 @@
   border-radius: 0 0 0 100%;
   min-width:30px;
   min-height:30px;
-  width:60px;
-  height:60px;
+  width:150px;
+  height:150px;
 }
 
 .blue{
@@ -37,13 +37,29 @@
   border-radius: 0 0 100% 0;
   min-width:30px;
   min-height:30px;
-  width:60px;
-  height:60px;
+  width:150px;
+  height:150px;
 }
 
-
-
-
-
 /************************************** menu ***************************************/ 
+.turnOn{
+
+}
+
+.start{
+
+}
+
+.screen{
+  background-color: black;
+  color:white;
+  width: 60px;
+  height:60px;
+  text-align:center;
+  font-size:50px;
+}
+
+.strict{
+
+}
 
