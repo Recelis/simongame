@@ -90,7 +90,9 @@ class MyGame extends Component {
 function restart() {
   if (strictMode === false) {
     console.log("restart level");
-
+    input = [];
+    mode = 'output';
+    // make sure that sequence is same 
   }
   else gameRestart();
 }
@@ -151,7 +153,6 @@ function setSequence() {
     console.log("sequence: " + sequence);
   }
 }
-
 
 function generateRandomSequence() {
   var min = 0
