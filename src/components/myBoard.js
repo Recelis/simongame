@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import MyButton from './myButton'
+import '../App.css';
 
 class MyBoard extends Component {
     constructor() {
@@ -28,13 +29,13 @@ class MyBoard extends Component {
     }
     renderButtons(color) {
         return <MyButton
-            color = {color}
-            onClick={()=>this.props.onClick(color)}
+            color={color}
+            onClick={() => this.props.onClick(color)}
         />
     }
-    renderStrict(){
+    renderStrict() {
         return <StrictButton
-            strictClick = {()=>this.props.strictClick()}
+            strictClick={() => this.props.strictClick()}
         />
     }
 
@@ -42,23 +43,26 @@ class MyBoard extends Component {
         // let Buttons = this.offToOn();
         return (
             <div>
-                <div className="turnOn">
-                    {this.renderToggle()}
-                </div>
-                <div className="start">
-                    {this.renderStart(0)}
-                </div>
                 <div className="buttons">
-                    {this.renderButtons("red")}
-                    {this.renderButtons("blue")}
                     {this.renderButtons("green")}
+                    {this.renderButtons("red")}
                     {this.renderButtons("yellow")}
+                    {this.renderButtons("blue")}
                 </div>
-                <div className="screen">
-                    {this.renderScreen()}
-                </div>
-                <div className="strict">
-                    {this.renderStrict()}
+                <div className="control">
+                    <div className = "title"><h1>Simon Game</h1></div>
+                    <div className="turnOn">
+                        {this.renderToggle()}
+                    </div>
+                    <div className="start">
+                        {this.renderStart(0)}
+                    </div>
+                    <div className="screen">
+                        {this.renderScreen()}
+                    </div>
+                    <div className="strict">
+                        {this.renderStrict()}
+                    </div>
                 </div>
             </div>
         );
@@ -88,9 +92,9 @@ function MyScreen(props) {
     )
 }
 
-function StrictButton(props){
+function StrictButton(props) {
     return (
-        <button className="strictButton" onClick={()=> props.strictClick()}>
+        <button className="strictButton" onClick={() => props.strictClick()}>
             {<p>strict mode</p>}
         </button>
     )

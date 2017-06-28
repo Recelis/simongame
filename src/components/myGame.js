@@ -21,8 +21,7 @@ class MyGame extends Component {
       scoreDisplay: '--',
     }
   }
-
-
+  
   setStartState() {
     gameRestart();
     if (isOn === false) isStarted = false;
@@ -71,7 +70,6 @@ class MyGame extends Component {
   render() {
     return (
       <div className="App">
-        <h1>Simon Game</h1>
         <MyBoard
           setOn={this.state.setOn}
           isOn={this.state.isOn}
