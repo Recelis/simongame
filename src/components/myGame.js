@@ -12,7 +12,6 @@ var strictMode = false;
 var mode = 'output';
 var isOn = false;
 
-
 class MyGame extends Component {
   constructor() {
     super();
@@ -20,6 +19,7 @@ class MyGame extends Component {
       setOn: 'off',
       scoreDisplay: '--',
       strictLight: "#B0D09D",
+      onLight: "#B86CA3",
     }
   }
   
@@ -42,6 +42,7 @@ class MyGame extends Component {
     this.setState({
       setOn: isOn ? 'off' : 'on',
       isStarted: false.toString(),
+      onLight:isOn ?"#B86CA3":"#FF6BD6",
     })
     isOn = !isOn;
     if (timerHandler !== undefined) clearInterval(timerHandler);
@@ -75,6 +76,7 @@ class MyGame extends Component {
         <MyBoard
           setOn={this.state.setOn}
           isOn={this.state.isOn}
+          onColor={this.state.onLight}
           setStartState={() => this.setStartState()}
           toggleClick={() => this.toggleClick()}
           screen={this.state.scoreDisplay}

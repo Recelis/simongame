@@ -20,6 +20,7 @@ class MyBoard extends Component {
         return <StartButton
             isStarted={this.state.isStarted}
             onClick={() => this.props.setStartState()}
+            onColor={this.props.onColor}
         />
     }
     renderScreen() {
@@ -81,7 +82,7 @@ function Switch(props) {
 
 function StartButton(props) {
     return (
-        <button className="start" onClick={() => props.onClick()}>
+        <button className="start" onClick={() => props.onClick()} style={{background:props.onColor}}>
             {<p>start</p>}
         </button>
     )
