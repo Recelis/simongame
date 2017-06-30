@@ -20,9 +20,13 @@ class MyGame extends Component {
       scoreDisplay: '--',
       strictLight: "#B0D09D",
       onLight: "#B86CA3",
+      red: "#9f0f17",
+      green: "#00a74a",
+      yellow: "#cca707",
+      blue: "#094a8f",
     }
   }
-  
+
   setStartState() {
     gameRestart();
     if (isOn === false) isStarted = false;
@@ -42,7 +46,7 @@ class MyGame extends Component {
     this.setState({
       setOn: isOn ? 'off' : 'on',
       isStarted: false.toString(),
-      onLight:isOn ?"#B86CA3":"#FF6BD6",
+      onLight: isOn ? "#B86CA3" : "#FF6BD6",
     })
     isOn = !isOn;
     if (timerHandler !== undefined) clearInterval(timerHandler);
@@ -52,9 +56,10 @@ class MyGame extends Component {
     pressedButtonFlag = true;
     switch (mode) {
       case "input":
+        mouseClickEffects(color);
         input.push(color);
         checkInputAgainstOutput();
-        this.setState({scoreDisplay: score});
+        this.setState({ scoreDisplay: score });
         break;
       case "output":
         input = [];
@@ -64,10 +69,35 @@ class MyGame extends Component {
     }
     console.log("input: " + input);
   }
+  onmouseup(color) {
+    var originalColor;
+    switch (color) {
+      case 'red':
+        originalColor = "#9f0f17";
+        this.setState({red:originalColor});
+        break;
+      case 'green':
+        originalColor = "#00a74a";
+        this.setState({green:originalColor});
+        break;
+      case 'yellow':
+        originalColor = "#cca707";
+        this.setState({yellow:originalColor});
+        break;
+      case 'blue':
+        originalColor = "#094a8f";
+        this.setState({blue:originalColor});
+        break;
+      default:
+        alert("Something is seriously wrong!");
+        break;
+    }
+    return originalColor;
+  }
 
   setStrict() {
     strictMode = strictMode ? false : true;
-    this.setState({strictLight:strictMode?"#9CFF5F":"#B0D09D"});
+    this.setState({ strictLight: strictMode ? "#9CFF5F" : "#B0D09D" });
   }
 
   render() {
@@ -81,8 +111,14 @@ class MyGame extends Component {
           toggleClick={() => this.toggleClick()}
           screen={this.state.scoreDisplay}
           onClick={(color) => this.buttonClick(color)}
+          onmouseup={(color) => this.onmouseup(color)}
           strictClick={() => this.setStrict()}
           strictColor={this.state.strictLight}
+          
+          red={this.state.red}
+          green={this.state.green}
+          blue={this.state.blue}
+          yellow={this.state.yellow}
         />
 
       </div>
@@ -182,6 +218,10 @@ function convertToColor(num) {
       break;
   }
   return output;
+}
+
+function mouseClickEffects(color){
+
 }
 
 

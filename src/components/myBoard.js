@@ -29,9 +29,29 @@ class MyBoard extends Component {
         />
     }
     renderButtons(color) {
+        var setButtonColor;
+        switch (color) {
+            case 'red':
+                setButtonColor = this.props.red;
+                break;
+            case 'green':
+                setButtonColor = this.props.green;
+                break;
+            case 'blue':
+                setButtonColor = this.props.blue;
+                break;
+            case 'yellow':
+                setButtonColor = this.props.yellow;
+                break;
+            default:
+                break;
+        }
+        console.log(setButtonColor);
         return <MyButton
             color={color}
+            buttonColor={setButtonColor}
             onClick={() => this.props.onClick(color)}
+            onmouseup={() => this.props.onmouseup(color)}
         />
     }
     renderStrict() {
@@ -52,7 +72,7 @@ class MyBoard extends Component {
                     {this.renderButtons("blue")}
                 </div>
                 <div className="control">
-                    <div className = "title"><h1>Simon <sup>&reg;</sup></h1></div>
+                    <div className="title"><h1>Simon <sup>&reg;</sup></h1></div>
                     <div className="turnOn">
                         {this.renderToggle()}
                     </div>
@@ -82,7 +102,7 @@ function Switch(props) {
 
 function StartButton(props) {
     return (
-        <button className="start" onClick={() => props.onClick()} style={{background:props.onColor}}>
+        <button className="start" onClick={() => props.onClick()} style={{ background: props.onColor }}>
             {<p>start</p>}
         </button>
     )
@@ -97,7 +117,7 @@ function MyScreen(props) {
 function StrictButton(props) {
     console.log(props.strictColor);
     return (
-        <button className="strictButton" onClick={() => props.strictClick()} style={{background:props.strictColor}}>
+        <button className="strictButton" onClick={() => props.strictClick()} style={{ background: props.strictColor }}>
             {<p>strict mode</p>}
         </button>
     )
