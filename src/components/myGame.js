@@ -19,6 +19,7 @@ class MyGame extends Component {
     this.state = {
       setOn: 'off',
       scoreDisplay: '--',
+      strictLight: "#B0D09D",
     }
   }
   
@@ -65,6 +66,7 @@ class MyGame extends Component {
 
   setStrict() {
     strictMode = strictMode ? false : true;
+    this.setState({strictLight:strictMode?"#9CFF5F":"#B0D09D"});
   }
 
   render() {
@@ -78,6 +80,7 @@ class MyGame extends Component {
           screen={this.state.scoreDisplay}
           onClick={(color) => this.buttonClick(color)}
           strictClick={() => this.setStrict()}
+          strictColor={this.state.strictLight}
         />
 
       </div>

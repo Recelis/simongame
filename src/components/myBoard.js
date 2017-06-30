@@ -35,6 +35,7 @@ class MyBoard extends Component {
     }
     renderStrict() {
         return <StrictButton
+            strictColor={this.props.strictColor}
             strictClick={() => this.props.strictClick()}
         />
     }
@@ -93,8 +94,9 @@ function MyScreen(props) {
 }
 
 function StrictButton(props) {
+    console.log(props.strictColor);
     return (
-        <button className="strictButton" onClick={() => props.strictClick()}>
+        <button className="strictButton" onClick={() => props.strictClick()} style={{background:props.strictColor}}>
             {<p>strict mode</p>}
         </button>
     )
