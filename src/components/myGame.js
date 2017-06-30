@@ -17,7 +17,7 @@ class MyGame extends Component {
     super();
     this.state = {
       setOn: 'off',
-      scoreDisplay: '--',
+      scoreDisplay: '',
       strictLight: "#B0D09D",
       onLight: "#B86CA3",
       red: "#9f0f17",
@@ -34,7 +34,7 @@ class MyGame extends Component {
       isStarted = true;
       this.setState({
         isStarted: isStarted.toString,
-        scoreDisplay: 0
+        scoreDisplay: 0,
       });
       setSequence();
       timerHandler = setInterval(() => gameplay(), 2000);
@@ -47,6 +47,7 @@ class MyGame extends Component {
       setOn: isOn ? 'off' : 'on',
       isStarted: false.toString(),
       onLight: isOn ? "#B86CA3" : "#FF6BD6",
+      scoreDisplay: '--',
     })
     isOn = !isOn;
     if (timerHandler !== undefined) clearInterval(timerHandler);
@@ -56,7 +57,7 @@ class MyGame extends Component {
     pressedButtonFlag = true;
     switch (mode) {
       case "input":
-        mouseClickEffects(color);
+        this.mouseClickEffects(color);
         input.push(color);
         checkInputAgainstOutput();
         this.setState({ scoreDisplay: score });
@@ -69,24 +70,50 @@ class MyGame extends Component {
     }
     console.log("input: " + input);
   }
+
+  mouseClickEffects(color) {
+    var originalColor;
+    switch (color) {
+      case 'red':
+        originalColor = "#ff4c4c";
+        this.setState({ red: originalColor });
+        break;
+      case 'green':
+        originalColor = "#13ff7c";
+        this.setState({ green: originalColor });
+        break;
+      case 'yellow':
+        originalColor = "#fed93f";
+        this.setState({ yellow: originalColor });
+        break;
+      case 'blue':
+        originalColor = "#1c8cff";
+        this.setState({ blue: originalColor });
+        break;
+      default:
+        alert("Something is seriously wrong!");
+        break;
+    }
+    return originalColor;
+  }
   onmouseup(color) {
     var originalColor;
     switch (color) {
       case 'red':
         originalColor = "#9f0f17";
-        this.setState({red:originalColor});
+        this.setState({ red: originalColor });
         break;
       case 'green':
         originalColor = "#00a74a";
-        this.setState({green:originalColor});
+        this.setState({ green: originalColor });
         break;
       case 'yellow':
         originalColor = "#cca707";
-        this.setState({yellow:originalColor});
+        this.setState({ yellow: originalColor });
         break;
       case 'blue':
         originalColor = "#094a8f";
-        this.setState({blue:originalColor});
+        this.setState({ blue: originalColor });
         break;
       default:
         alert("Something is seriously wrong!");
@@ -114,7 +141,7 @@ class MyGame extends Component {
           onmouseup={(color) => this.onmouseup(color)}
           strictClick={() => this.setStrict()}
           strictColor={this.state.strictLight}
-          
+
           red={this.state.red}
           green={this.state.green}
           blue={this.state.blue}
@@ -219,10 +246,5 @@ function convertToColor(num) {
   }
   return output;
 }
-
-function mouseClickEffects(color){
-
-}
-
 
 export default MyGame;

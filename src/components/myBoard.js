@@ -51,7 +51,7 @@ class MyBoard extends Component {
             color={color}
             buttonColor={setButtonColor}
             onClick={() => this.props.onClick(color)}
-            onmouseup={() => this.props.onmouseup(color)}
+            onMouseUp={() => this.props.onmouseup(color)}
         />
     }
     renderStrict() {
