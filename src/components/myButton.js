@@ -6,8 +6,8 @@ class MyButton extends Component {
         return (
             <button 
             className = {this.props.color} 
-            onClick={this.props.onClick} 
-            onMouseUp={this.props.onmouseup} 
+            onMouseDown={this.props.onMouseDown} 
+            onMouseUp={this.props.onMouseUp} 
             style={{background:this.props.buttonColor}}></button>
         )
     }

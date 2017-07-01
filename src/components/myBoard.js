@@ -46,12 +46,11 @@ class MyBoard extends Component {
             default:
                 break;
         }
-        console.log(setButtonColor);
         return <MyButton
             color={color}
             buttonColor={setButtonColor}
-            onClick={() => this.props.onClick(color)}
-            onMouseUp={() => this.props.onmouseup(color)}
+            onMouseDown={() => this.props.onMouseDown(color)}
+            onMouseUp={() => this.props.onMouseUp(color)}
         />
     }
     renderStrict() {
@@ -62,7 +61,6 @@ class MyBoard extends Component {
     }
 
     render() {
-        // let Buttons = this.offToOn();
         return (
             <div>
                 <div className="buttons">
@@ -115,10 +113,9 @@ function MyScreen(props) {
 }
 
 function StrictButton(props) {
-    console.log(props.strictColor);
     return (
         <button className="strictButton" onClick={() => props.strictClick()} style={{ background: props.strictColor }}>
-            {<p>strict mode</p>}
+            {<p>strict</p>}
         </button>
     )
 }

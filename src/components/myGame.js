@@ -53,7 +53,7 @@ class MyGame extends Component {
     if (timerHandler !== undefined) clearInterval(timerHandler);
   }
 
-  buttonClick(color) {
+  onMouseDown(color) {
     pressedButtonFlag = true;
     switch (mode) {
       case "input":
@@ -63,6 +63,7 @@ class MyGame extends Component {
         this.setState({ scoreDisplay: score });
         break;
       case "output":
+        this.mouseClickEffects(color);
         input = [];
         break;
       default:
@@ -72,31 +73,31 @@ class MyGame extends Component {
   }
 
   mouseClickEffects(color) {
-    var originalColor;
+    var clickedColor;
     switch (color) {
       case 'red':
-        originalColor = "#ff4c4c";
-        this.setState({ red: originalColor });
+        clickedColor = "#ff4c4c";
+        this.setState({ red: clickedColor });
         break;
       case 'green':
-        originalColor = "#13ff7c";
-        this.setState({ green: originalColor });
+        clickedColor = "#13ff7c";
+        this.setState({ green: clickedColor });
         break;
       case 'yellow':
-        originalColor = "#fed93f";
-        this.setState({ yellow: originalColor });
+        clickedColor = "#fed93f";
+        this.setState({ yellow: clickedColor });
         break;
       case 'blue':
-        originalColor = "#1c8cff";
-        this.setState({ blue: originalColor });
+        clickedColor = "#1c8cff";
+        this.setState({ blue: clickedColor });
         break;
       default:
         alert("Something is seriously wrong!");
         break;
     }
-    return originalColor;
+    return clickedColor;
   }
-  onmouseup(color) {
+  onMouseUp(color) {
     var originalColor;
     switch (color) {
       case 'red':
@@ -119,6 +120,10 @@ class MyGame extends Component {
         alert("Something is seriously wrong!");
         break;
     }
+    console.log("red:" + this.state.red);
+    console.log("blue:" + this.state.blue);
+    console.log("green:" + this.state.green);
+    console.log("yellow:" + this.state.yellow);
     return originalColor;
   }
 
@@ -137,8 +142,8 @@ class MyGame extends Component {
           setStartState={() => this.setStartState()}
           toggleClick={() => this.toggleClick()}
           screen={this.state.scoreDisplay}
-          onClick={(color) => this.buttonClick(color)}
-          onmouseup={(color) => this.onmouseup(color)}
+          onMouseDown={(color) => this.onMouseDown(color)}
+          onMouseUp={(color) => this.onMouseUp(color)}
           strictClick={() => this.setStrict()}
           strictColor={this.state.strictLight}
 
@@ -212,7 +217,6 @@ function checkInputAgainstOutput() {
 }
 
 function setSequence() {
-  console.log("setsequence");
   if (sequence.length < score + 1) {
     var randomNum = generateRandomSequence();
     sequence.push(convertToColor(randomNum));
