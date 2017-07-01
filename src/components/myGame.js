@@ -11,7 +11,10 @@ var score = 0;
 var strictMode = false;
 var mode = 'output';
 var isOn = false;
-
+var redSound = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound1.mp3');
+var greenSound = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound2.mp3');
+var yellowSound = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound3.mp3');
+var blueSound = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound4.mp3');
 class MyGame extends Component {
   constructor() {
     super();
@@ -107,18 +110,22 @@ outputSequence(){
       case 'red':
         clickedColor = "#ff4c4c";
         this.setState({ red: clickedColor });
+        redSound.play();
         break;
       case 'green':
         clickedColor = "#13ff7c";
         this.setState({ green: clickedColor });
+        greenSound.play();
         break;
       case 'yellow':
         clickedColor = "#fed93f";
         this.setState({ yellow: clickedColor });
+        yellowSound.play();
         break;
       case 'blue':
         clickedColor = "#1c8cff";
         this.setState({ blue: clickedColor });
+        blueSound.play();
         break;
       default:
         alert("Something is seriously wrong!");
@@ -133,6 +140,10 @@ outputSequence(){
       yellow: "#cca707",
       blue:"#094a8f",
     })
+    // redSound.pause();
+    // greenSound.pause();
+    // yellowSound.pause();
+    // blueSound.pause();
   }
 
   setStrict() {
