@@ -120,10 +120,6 @@ class MyGame extends Component {
         alert("Something is seriously wrong!");
         break;
     }
-    console.log("red:" + this.state.red);
-    console.log("blue:" + this.state.blue);
-    console.log("green:" + this.state.green);
-    console.log("yellow:" + this.state.yellow);
     return originalColor;
   }
 
@@ -212,6 +208,7 @@ function checkInputAgainstOutput() {
     console.log("next level!");
     score++;
     mode = 'output';
+    input = [];
     setSequence();
   }
 }
