@@ -14,7 +14,7 @@ class MyBoard extends Component {
         return <Switch
             setOn={this.props.setOn}
             onClick={() => this.props.toggleClick()}
-            onColor = {this.props.onColor}
+            onColor={this.props.onColor}
         />
     }
     renderStart() {
@@ -63,12 +63,16 @@ class MyBoard extends Component {
 
     render() {
         return (
-            <div>
-                <div className="buttons">
-                    {this.renderButtons("green")}
-                    {this.renderButtons("red")}
-                    {this.renderButtons("yellow")}
-                    {this.renderButtons("blue")}
+            <div className="container-fluid">
+                <div className="row">
+                    <div className="col-xs-6 left">{this.renderButtons("green")}</div>
+                    <div className="col-xs-6 right">{this.renderButtons("red")}</div>
+                </div>
+                <div className="row">
+                    
+
+                    <div className="col-xs-6 left">{this.renderButtons("yellow")}</div>
+                    <div className="col-xs-6 right">{this.renderButtons("blue")}</div>
                 </div>
                 <div className="control">
                     <div className="title"><h1>Simon <sup>&reg;</sup></h1></div>
@@ -85,7 +89,7 @@ class MyBoard extends Component {
                         {this.renderStrict()}
                     </div>
                 </div>
-            </div>
+            </div >
         );
     }
 }
