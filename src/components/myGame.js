@@ -5,7 +5,7 @@ let isStarted = false;
 let input = [];
 var sequence = [];
 var timerHandler;
-var pressedButtonFlag = false;
+var pressedButtonFlag = true;
 var counting = 0;
 var score = 0;
 var strictMode = false;
@@ -43,19 +43,11 @@ class MyGame extends Component {
     }
   }
 
-  gameplay() {
+  gameplay() {  
   if (mode === 'output') {
     // count up to sequence all played
-    this.clearScreen();
-    if (counting < sequence.length){
-      this.mouseClickEffects(sequence[counting]);
-      counting++;
-    }
-    else {
-      counting = 0;
-      console.log(counting);
-      return mode = 'input';
-    }
+    this.onMouseUp();
+    setTimeout(()=>this.outputSequence(),200);
   } else if (mode === 'input') {
     if (input.length !== sequence.length) {
       if (pressedButtonFlag === false) return restart(); // didn't press button in time
@@ -66,6 +58,17 @@ class MyGame extends Component {
   } else {
     // do nothing
   }
+}
+
+outputSequence(){
+  if (counting < sequence.length){
+      this.mouseClickEffects(sequence[counting]);
+      counting++;
+    }
+    else {
+      counting = 0;
+      mode = 'input';
+    }
 }
 
   toggleClick() { // change to feature fully functional slide
@@ -123,7 +126,7 @@ class MyGame extends Component {
     }
     return clickedColor;
   }
-  clearScreen() { // clear buttons
+  onMouseUp() { // clear buttons
     this.setState({
       red:"#9f0f17",
       green:"#00a74a",
@@ -148,7 +151,7 @@ class MyGame extends Component {
           setStartState={() => this.setStartState()}
           toggleClick={() => this.toggleClick()}
           screen={this.state.scoreDisplay}
-          clearScreen={(color) => this.clearScreen(color)}
+          onMouseDown={(color) => this.onMouseDown(color)}
           onMouseUp={(color) => this.onMouseUp(color)}
           strictClick={() => this.setStrict()}
           strictColor={this.state.strictLight}
@@ -163,6 +166,7 @@ class MyGame extends Component {
     );
   }
 }
+
 
 function restart() {
   if (strictMode === false) {

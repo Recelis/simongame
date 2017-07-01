@@ -51,7 +51,7 @@ class MyBoard extends Component {
             color={color}
             buttonColor={setButtonColor}
             onMouseDown={() => this.props.onMouseDown(color)}
-            onMouseUp={() => this.props.clearScreen()}
+            onMouseUp={() => this.props.onMouseUp()}
         />
     }
     renderStrict() {
