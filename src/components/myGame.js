@@ -19,7 +19,8 @@ class MyGame extends Component {
       setOn: 'off',
       scoreDisplay: '',
       strictLight: "#B0D09D",
-      onLight: "#B86CA3",
+      onLight: "#009999",
+      startLight: "#B86CA3",
       red: "#9f0f17",
       green: "#00a74a",
       yellow: "#cca707",
@@ -34,6 +35,7 @@ class MyGame extends Component {
       isStarted = true;
       this.setState({
         isStarted: isStarted.toString,
+        startLight: "#FF6BD6",
         scoreDisplay: 0,
       });
       setSequence();
@@ -70,7 +72,8 @@ class MyGame extends Component {
     this.setState({
       setOn: isOn ? 'off' : 'on',
       isStarted: false.toString(),
-      onLight: isOn ? "#B86CA3" : "#FF6BD6",
+      onLight: isOn ? "#009999":"#1affff",
+      startLight:isOn? "#B86CA3":this.state.startLight,
       scoreDisplay: '--',
     })
     isOn = !isOn;
@@ -140,7 +143,8 @@ class MyGame extends Component {
         <MyBoard
           setOn={this.state.setOn}
           isOn={this.state.isOn}
-          onColor={this.state.onLight}
+          onColor  = {this.state.onLight}
+          startLight={this.state.startLight}
           setStartState={() => this.setStartState()}
           toggleClick={() => this.toggleClick()}
           screen={this.state.scoreDisplay}
