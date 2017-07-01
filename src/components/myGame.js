@@ -37,10 +37,34 @@ class MyGame extends Component {
         scoreDisplay: 0,
       });
       setSequence();
-      timerHandler = setInterval(() => gameplay(), 2000);
+      timerHandler = setInterval(() => this.gameplay(), 2000);
     }
   }
 
+  gameplay() {
+  if (mode === 'output') {
+    // count up to sequence all played
+    this.clearScreen();
+    if (counting < sequence.length){
+      this.mouseClickEffects(sequence[counting]);
+      counting++;
+    }
+    else {
+      counting = 0;
+      console.log(counting);
+      return mode = 'input';
+    }
+  } else if (mode === 'input') {
+    if (input.length !== sequence.length) {
+      if (pressedButtonFlag === false) return restart(); // didn't press button in time
+      else {
+        pressedButtonFlag = false;
+      }
+    }
+  } else {
+    // do nothing
+  }
+}
 
   toggleClick() { // change to feature fully functional slide
     this.setState({
@@ -63,7 +87,6 @@ class MyGame extends Component {
         this.setState({ scoreDisplay: score });
         break;
       case "output":
-        this.mouseClickEffects(color);
         input = [];
         break;
       default:
@@ -97,30 +120,13 @@ class MyGame extends Component {
     }
     return clickedColor;
   }
-  onMouseUp(color) {
-    var originalColor;
-    switch (color) {
-      case 'red':
-        originalColor = "#9f0f17";
-        this.setState({ red: originalColor });
-        break;
-      case 'green':
-        originalColor = "#00a74a";
-        this.setState({ green: originalColor });
-        break;
-      case 'yellow':
-        originalColor = "#cca707";
-        this.setState({ yellow: originalColor });
-        break;
-      case 'blue':
-        originalColor = "#094a8f";
-        this.setState({ blue: originalColor });
-        break;
-      default:
-        alert("Something is seriously wrong!");
-        break;
-    }
-    return originalColor;
+  clearScreen() { // clear buttons
+    this.setState({
+      red:"#9f0f17",
+      green:"#00a74a",
+      yellow: "#cca707",
+      blue:"#094a8f",
+    })
   }
 
   setStrict() {
@@ -138,7 +144,7 @@ class MyGame extends Component {
           setStartState={() => this.setStartState()}
           toggleClick={() => this.toggleClick()}
           screen={this.state.scoreDisplay}
-          onMouseDown={(color) => this.onMouseDown(color)}
+          clearScreen={(color) => this.clearScreen(color)}
           onMouseUp={(color) => this.onMouseUp(color)}
           strictClick={() => this.setStrict()}
           strictColor={this.state.strictLight}
@@ -176,26 +182,6 @@ function gameRestart() { // restarts game
   return 0;
 }
 
-function gameplay() {
-  if (mode === 'output') {
-    // count up to sequence all played
-    if (counting < sequence.length) console.log("beeps:" + counting++);
-    else {
-      counting = 0;
-      console.log(counting);
-      return mode = 'input';
-    }
-  } else if (mode === 'input') {
-    if (input.length !== sequence.length) {
-      if (pressedButtonFlag === false) return restart(); // didn't press button in time
-      else {
-        pressedButtonFlag = false;
-      }
-    }
-  } else {
-    // do nothing
-  }
-}
 
 function checkInputAgainstOutput() {
   for (var ii = 0; ii < input.length; ii++) {

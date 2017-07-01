@@ -14,6 +14,7 @@ class MyBoard extends Component {
         return <Switch
             setOn={this.props.setOn}
             onClick={() => this.props.toggleClick()}
+            onColor = {this.props.onColor}
         />
     }
     renderStart() {
@@ -50,7 +51,7 @@ class MyBoard extends Component {
             color={color}
             buttonColor={setButtonColor}
             onMouseDown={() => this.props.onMouseDown(color)}
-            onMouseUp={() => this.props.onMouseUp(color)}
+            onMouseUp={() => this.props.clearScreen()}
         />
     }
     renderStrict() {
@@ -92,7 +93,7 @@ class MyBoard extends Component {
 
 function Switch(props) {
     return (
-        <button className="switch" onClick={() => props.onClick()}>
+        <button className="switch" onClick={() => props.onClick()} style={{ background: props.onColor }}>
             {props.setOn}
         </button>
     )
