@@ -46,25 +46,26 @@ class MyGame extends Component {
     }
   }
 
-  gameplay() {  
-  if (mode === 'output') {
-    // count up to sequence all played
-    this.onMouseUp();
-    setTimeout(()=>this.outputSequence(),300);
-  } else if (mode === 'input') {
-    if (input.length !== sequence.length) {
-      if (pressedButtonFlag === false) return restart(); // didn't press button in time
-      else {
-        pressedButtonFlag = false;
+  gameplay() {
+    this.checkEndGame();
+    if (mode === 'output') {
+      // count up to sequence all played
+      this.onMouseUp();
+      setTimeout(() => this.outputSequence(), 300);
+    } else if (mode === 'input') {
+      if (input.length !== sequence.length) {
+        if (pressedButtonFlag === false) return restart(); // didn't press button in time
+        else {
+          pressedButtonFlag = false;
+        }
       }
+    } else {
+      // do nothing
     }
-  } else {
-    // do nothing
   }
-}
 
-outputSequence(){
-  if (counting < sequence.length){
+  outputSequence() {
+    if (counting < sequence.length) {
       this.mouseClickEffects(sequence[counting]);
       counting++;
     }
@@ -72,14 +73,14 @@ outputSequence(){
       counting = 0;
       mode = 'input';
     }
-}
+  }
 
   toggleClick() { // change to feature fully functional slide
     this.setState({
       setOn: isOn ? 'off' : 'on',
       isStarted: false.toString(),
-      onLight: isOn ? "#009999":"#1affff",
-      startLight:isOn? "#B86CA3":this.state.startLight,
+      onLight: isOn ? "#009999" : "#1affff",
+      startLight: isOn ? "#B86CA3" : this.state.startLight,
       scoreDisplay: '--',
     })
     isOn = !isOn;
@@ -102,7 +103,6 @@ outputSequence(){
       default:
         break;
     }
-    console.log("input: " + input);
   }
 
   mouseClickEffects(color) {
@@ -136,15 +136,21 @@ outputSequence(){
   }
   onMouseUp() { // clear buttons
     this.setState({
-      red:"#9f0f17",
-      green:"#00a74a",
+      red: "#9f0f17",
+      green: "#00a74a",
       yellow: "#cca707",
-      blue:"#094a8f",
+      blue: "#094a8f",
     })
-    // redSound.pause();
-    // greenSound.pause();
-    // yellowSound.pause();
-    // blueSound.pause();
+  }
+
+  checkEndGame() {
+    if (score === 20) {
+      gameRestart();
+      isStarted = true;
+      this.setState({scoreDisplay:"W!"});
+      if (timerHandler !== undefined) clearInterval(timerHandler);
+      setTimeout(()=>this.setStartState(),2000);
+    }
   }
 
   setStrict() {
@@ -158,7 +164,7 @@ outputSequence(){
         <MyBoard
           setOn={this.state.setOn}
           isOn={this.state.isOn}
-          onColor  = {this.state.onLight}
+          onColor={this.state.onLight}
           startLight={this.state.startLight}
           setStartState={() => this.setStartState()}
           toggleClick={() => this.toggleClick()}
@@ -190,7 +196,7 @@ function restart() {
   else gameRestart();
 }
 
-function gameRestart() { // restarts game
+function gameRestart() { // restarts game variables
   console.log("restart game");
   mode = 'output';
   score = 0;
