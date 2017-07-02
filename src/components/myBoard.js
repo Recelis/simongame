@@ -69,24 +69,24 @@ class MyBoard extends Component {
                     <div className="col-xs-6 right">{this.renderButtons("red")}</div>
                 </div>
                 <div className="row">
-                    
-
                     <div className="col-xs-6 left">{this.renderButtons("yellow")}</div>
                     <div className="col-xs-6 right">{this.renderButtons("blue")}</div>
                 </div>
                 <div className="control">
-                    <div className="title"><h1>Simon <sup>&reg;</sup></h1></div>
-                    <div className="turnOn">
+                    <div className="title"><h1>Simon<sup>&reg;</sup></h1></div>
+                    <div className="row">
+                    <div className="col-xs-4">
                         {this.renderToggle()}
                     </div>
-                    <div className="start">
+                    <div className="col-xs-4">
                         {this.renderStart(0)}
                     </div>
-                    <div className="screen">
-                        {this.renderScreen()}
-                    </div>
-                    <div className="strict">
+                    <div className="col-xs-4">
                         {this.renderStrict()}
+                    </div>
+                    </div>
+                    <div>
+                        {this.renderScreen()}
                     </div>
                 </div>
             </div >
@@ -113,7 +113,7 @@ function StartButton(props) {
 
 function MyScreen(props) {
     return (
-        <div><p>{props.screen}</p></div>
+        <p className="screen">{props.screen}</p>
     )
 }
 
