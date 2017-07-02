@@ -75,15 +75,15 @@ class MyBoard extends Component {
                 <div className="control">
                     <div className="title"><h1>Simon<sup>&reg;</sup></h1></div>
                     <div className="row">
-                    <div className="col-xs-4">
-                        {this.renderToggle()}
-                    </div>
-                    <div className="col-xs-4">
-                        {this.renderStart(0)}
-                    </div>
-                    <div className="col-xs-4">
-                        {this.renderStrict()}
-                    </div>
+                        <div className="col-xs-4">
+                            {this.renderToggle()}
+                        </div>
+                        <div className="col-xs-4">
+                            {this.renderStart(0)}
+                        </div>
+                        <div className="col-xs-4">
+                            {this.renderStrict()}
+                        </div>
                     </div>
                     <div>
                         {this.renderScreen()}
@@ -119,7 +119,7 @@ function MyScreen(props) {
 
 function StrictButton(props) {
     return (
-        <button className="strictButton" onClick={() => props.strictClick()} style={{ background: props.strictColor }}>
+        <button className="strictButton" onClick={() => props.strictClick()} style={{ background: props.strictColor}}>
             {<p>strict</p>}
         </button>
     )

@@ -1,20 +1,22 @@
 
+.container-fluid{
+  margin-top:300px;
+}
+
 .left{
   text-align:right;
-  background-color:purple;
   margin-right:0;
   padding:0;
 }
 .right{
   text-align:left;
-  background-color:cyan;
   margin-left:0;
   padding:0;
 }
 /************************************** Buttons ***************************************/ 
 .green{
   border: 10px solid;
-  border-color: black;
+  border-color: silver;
   border-radius: 100% 0 0 0;
   min-width:60px;
   min-height:60px;
@@ -24,7 +26,7 @@
 
 .red{
   border: 10px solid;
-  border-color: black;
+  border-color: silver;
   border-radius: 0 100% 0 0;
   min-width:30px;
   min-height:30px;
@@ -34,7 +36,7 @@
 
 .yellow{
   border: 10px solid;
-  border-color: black;
+  border-color: silver;
   border-radius: 0 0 0 100%;
   min-width:30px;
   min-height:30px;
@@ -44,7 +46,7 @@
 
 .blue{
   border: 10px solid;
-  border-color: black;
+  border-color: silver;
   border-radius: 0 0 100% 0;
   min-width:30px;
   min-height:30px;
@@ -54,14 +56,15 @@
 
 /************************************** menu ***************************************/ 
 .control{
-  background-color:white;
+  background-color:#353839;
   width:300px;
   height:300px;
   text-align:center;
   border:10px solid;
   border-radius:100%;
+  border-color: silver;
   position:absolute;
-  top:150px;
+  top:450px;
   left:50vw;
   padding:0px;
   margin-left:-150px;
@@ -97,7 +100,7 @@
 .screen{
   border:2px solid;
   border-radius:10%;
-  background-color: black;
+  background-color:black;
   color:white;
   width: 60px;
   height:60px;
@@ -108,6 +111,7 @@
 
 .title{
   margin:35px;
+  color:silver;
 }
 
 
