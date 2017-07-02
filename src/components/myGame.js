@@ -50,7 +50,7 @@ class MyGame extends Component {
   if (mode === 'output') {
     // count up to sequence all played
     this.onMouseUp();
-    setTimeout(()=>this.outputSequence(),200);
+    setTimeout(()=>this.outputSequence(),300);
   } else if (mode === 'input') {
     if (input.length !== sequence.length) {
       if (pressedButtonFlag === false) return restart(); // didn't press button in time
@@ -83,6 +83,7 @@ outputSequence(){
       scoreDisplay: '--',
     })
     isOn = !isOn;
+    if (isOn === false) this.onMouseUp();
     if (timerHandler !== undefined) clearInterval(timerHandler);
   }
 

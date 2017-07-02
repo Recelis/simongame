@@ -113,7 +113,7 @@ function StartButton(props) {
 
 function MyScreen(props) {
     return (
-        <p>{props.screen}</p>
+        <div><p>{props.screen}</p></div>
     )
 }
 
