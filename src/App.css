@@ -114,6 +114,14 @@
   color:silver;
 }
 
+.copyright{
+  position:absolute;
+  text-align:center;
+  width:100%;
+  color:silver;
+  font-size:20px;
+  top:90%;
+}
 
 
 /*
