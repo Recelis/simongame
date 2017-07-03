@@ -81,7 +81,7 @@ class MyGame extends Component {
       isStarted: false.toString(),
       onLight: isOn ? "#009999" : "#1affff",
       startLight: isOn ? "#B86CA3" : this.state.startLight,
-      scoreDisplay: '--',
+      scoreDisplay: isOn ? "":'--',
     })
     isOn = !isOn;
     if (isOn === false) this.onMouseUp();
@@ -154,8 +154,10 @@ class MyGame extends Component {
   }
 
   setStrict() {
-    strictMode = strictMode ? false : true;
-    this.setState({ strictLight: strictMode ? "#9CFF5F" : "#B0D09D" });
+    if (isOn === true){
+      strictMode = strictMode ? false : true;
+      this.setState({ strictLight: strictMode ? "#9CFF5F" : "#B0D09D" });
+    }
   }
 
   render() {
