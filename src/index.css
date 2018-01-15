@@ -2,5 +2,10 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  background-image:url("./images/timber.jpeg");
+  background-image:url("https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Mountains-1412683.svg/800px-Mountains-1412683.svg.png");
+  background-repeat:no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
